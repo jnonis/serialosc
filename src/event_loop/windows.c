@@ -14,13 +14,15 @@
  * OR IN CONNECTION WITH THE USE OR PERFORMANCE OF THIS SOFTWARE.
  */
 
+#include "serialosc.h"
+
 #include <stdio.h>
 
 #include <windows.h>
 #include <Winsock.h>
 #include <io.h>
 
-#include "serialosc.h"
+
 
 static DWORD WINAPI lo_thread(LPVOID param) {
 	sosc_state_t *state = param;

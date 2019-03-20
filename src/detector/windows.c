@@ -14,21 +14,21 @@
  * OR IN CONNECTION WITH THE USE OR PERFORMANCE OF THIS SOFTWARE.
  */
 
+/* for RegisterDeviceNotification */
+#define WINVER 0x501	
+
+#include "serialosc.h"
+#include "ipc.h" 
+
 #include <assert.h>
 #include <stdio.h>
 #include <fcntl.h>
-
-/* for RegisterDeviceNotification */
-#define WINVER 0x501
 
 #include <windows.h>
 #include <process.h>
 #include <Winreg.h>
 #include <Dbt.h>
 #include <io.h>
-
-#include "serialosc.h"
-#include "ipc.h"
 
 #define FTDI_REG_PATH "SYSTEM\\CurrentControlSet\\Enum\\FTDIBUS"
 

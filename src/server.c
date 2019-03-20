@@ -40,6 +40,10 @@
 #define DEFAULT_OSC_APP_HOST    "127.0.0.1"
 #define DEFAULT_ROTATION        MONOME_ROTATE_0
 
+float adcXValue = 0;
+float adcYValue = 0;
+float adcZValue = 0;
+float adcKValue = 0;
 
 static void lo_error(int num, const char *error_msg, const char *path) {
 	fprintf(stderr, "serialosc: lo server error %d in %s: %s\n",
@@ -86,11 +90,40 @@ static void handle_enc_key(const monome_event_t *e, void *data) {
 static void handle_tilt(const monome_event_t *e, void *data) {
 	sosc_state_t *state = data;
 	char *cmd;
-
+	
 	cmd = osc_path("tilt", state->config.app.osc_prefix);
 	lo_send_from(state->outgoing, state->server, LO_TT_IMMEDIATE, cmd, "iiii",
 	             e->tilt.sensor, e->tilt.x, e->tilt.y, e->tilt.z);
 	s_free(cmd);
+	
+	if (adcXValue != e->tilt.x) {
+		cmd = osc_path("adc", state->config.app.osc_prefix);
+		adcXValue = e->tilt.x;
+		lo_send_from(state->outgoing, state->server, LO_TT_IMMEDIATE, cmd, "if",
+					e->tilt.sensor, e->tilt.x / (float) 255);
+		s_free(cmd);
+	}
+	if (adcYValue != e->tilt.y) {
+		adcYValue = e->tilt.y;
+		cmd = osc_path("adc", state->config.app.osc_prefix);
+		lo_send_from(state->outgoing, state->server, LO_TT_IMMEDIATE, cmd, "if",
+	             e->tilt.sensor + 1, e->tilt.y / (float) 255);
+		s_free(cmd);
+	}
+	if (adcZValue != e->tilt.z) {
+		adcZValue = e->tilt.z;
+		cmd = osc_path("adc", state->config.app.osc_prefix);
+		lo_send_from(state->outgoing, state->server, LO_TT_IMMEDIATE, cmd, "if",
+	             e->tilt.sensor + 2, e->tilt.z / (float) 255);
+		s_free(cmd);
+	}
+	if (adcXValue != e->tilt.k) {
+		adcKValue = e->tilt.k;
+		cmd = osc_path("adc", state->config.app.osc_prefix);
+		lo_send_from(state->outgoing, state->server, LO_TT_IMMEDIATE, cmd, "if",
+					e->tilt.sensor + 3, e->tilt.k / (float) 255);
+		s_free(cmd);
+	}
 }
 
 static void send_connection_status(sosc_state_t *state, int status) {
@@ -236,7 +269,7 @@ void sosc_server_run(monome_t *monome)
 
 	monome_set_rotation(state.monome, state.config.dev.rotation);
 	monome_led_all(state.monome, 0);
-
+	
 	osc_register_sys_methods(&state);
 	osc_register_methods(&state);
 

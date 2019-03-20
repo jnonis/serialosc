@@ -105,7 +105,7 @@ def check_dnssd_win(conf):
 	conf.check_cc(
 		mandatory=True,
 		header_name="dns_sd.h",
-		includes=["c:/program files/bonjour sdk/include"],
+		includes=["C:/Archivos de programa/Bonjour SDK/Include"],
 		uselib_store="DNSSD_INC")
 
 
@@ -141,6 +141,8 @@ def configure(conf):
 		conf.load("winres")
 		conf.env.append_unique("LIBPATH", conf.env.LIBDIR)
 		conf.env.append_unique("CFLAGS", conf.env.CPPPATH_ST % conf.env.INCLUDEDIR)
+		conf.env.append_unique("LIBPATH", "C:/dev/monome/serialosc/serialosc/lib")
+		conf.env.append_unique("CFLAGS", conf.env.CPPPATH_ST % "C:/dev/monome/serialosc/serialosc/include")
 
 	#
 	# conf checks

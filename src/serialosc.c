@@ -44,6 +44,7 @@ int main(int argc, char **argv)
 	setvbuf(stderr, NULL, _IONBF, 0);
 #endif
 
+	fprintf(stderr, "serialosc bliptronome mod: 65 button and light support, 4 ADC enabled\n");
 	if (argc < 2) {
 		/* if we're missing that argument, run as the "supervisor" process,
 		   which goes on to spawn the monitor, and in turn the individual
@@ -85,7 +86,7 @@ int main(int argc, char **argv)
 
 	if (!(device = monome_open(argv[1])))
 		return EXIT_FAILURE;
-
+	
 #ifndef WIN32
 	setenv("AVAHI_COMPAT_NOWARN", "shut up", 1);
 #endif

@@ -14,11 +14,11 @@
  * OR IN CONNECTION WITH THE USE OR PERFORMANCE OF THIS SOFTWARE.
  */
 
+#include "serialosc.h"
+#include "zeroconf.h" 
+
 #include <stdio.h>
 #include <dns_sd.h>
-
-#include "serialosc.h"
-#include "zeroconf.h"
 
 dnssd_registration_func_t sosc_dnssd_registration_func = NULL;
 dnssd_deallocation_func_t sosc_dnssd_deallocation_func = NULL;

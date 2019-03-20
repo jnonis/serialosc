@@ -14,19 +14,19 @@
  * OR IN CONNECTION WITH THE USE OR PERFORMANCE OF THIS SOFTWARE.
  */
 
-#include <stdio.h>
-
 #define WINVER 0x501
+
+#include "serialosc.h"
+#include "ipc.h"
+#include "osc.h"
+
+#include <stdio.h>
 
 #include <windows.h>
 #include <process.h>
 #include <Winreg.h>
 #include <Dbt.h>
 #include <io.h>
-
-#include "serialosc.h"
-#include "ipc.h"
-#include "osc.h"
 
 /* damnit mingw */
 #ifndef JOB_OBJECT_LIMIT_KILL_ON_JOB_CLOSE

@@ -31,7 +31,7 @@
 #define DEFAULT_OSC_PREFIX   "/monome"
 #define DEFAULT_APP_PORT     8000
 #define DEFAULT_APP_HOST     "127.0.0.1"
-#define DEFAULT_ROTATION     MONOME_ROTATE_0
+#define DEFAULT_ROTATION     90
 
 
 static cfg_opt_t server_opts[] = {

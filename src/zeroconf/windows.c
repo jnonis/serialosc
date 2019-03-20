@@ -14,13 +14,13 @@
  * OR IN CONNECTION WITH THE USE OR PERFORMANCE OF THIS SOFTWARE.
  */
 
+#include "serialosc.h"
+#include "zeroconf.h"
+
 #include <stdio.h>
 
 #include <Windows.h>
 #include <dns_sd.h>
-
-#include "serialosc.h"
-#include "zeroconf.h"
 
 void sosc_zeroconf_init()
 {
