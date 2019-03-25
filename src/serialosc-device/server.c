@@ -114,31 +114,31 @@ handle_tilt(const monome_event_t *e, void *data)
 	s_free(cmd);
 
 	if (adcXValue != e->tilt.x) {
-		cmd = osc_path("adc", state->config.app.osc_prefix);
 		adcXValue = e->tilt.x;
+		cmd = osc_path("adc", state->config.app.osc_prefix);
 		lo_send_from(state->outgoing, state->server, LO_TT_IMMEDIATE, cmd, "if",
-					e->tilt.sensor, e->tilt.x / (float) 255);
+	             e->tilt.sensor, e->tilt.x / (float) 1023);
 		s_free(cmd);
 	}
 	if (adcYValue != e->tilt.y) {
 		adcYValue = e->tilt.y;
 		cmd = osc_path("adc", state->config.app.osc_prefix);
 		lo_send_from(state->outgoing, state->server, LO_TT_IMMEDIATE, cmd, "if",
-	             e->tilt.sensor + 1, e->tilt.y / (float) 255);
+	             e->tilt.sensor + 1, e->tilt.y / (float) 1023);
 		s_free(cmd);
 	}
 	if (adcZValue != e->tilt.z) {
 		adcZValue = e->tilt.z;
 		cmd = osc_path("adc", state->config.app.osc_prefix);
 		lo_send_from(state->outgoing, state->server, LO_TT_IMMEDIATE, cmd, "if",
-	             e->tilt.sensor + 2, e->tilt.z / (float) 255);
+	             e->tilt.sensor + 2, e->tilt.z / (float) 1023);
 		s_free(cmd);
 	}
 	if (adcXValue != e->tilt.k) {
 		adcKValue = e->tilt.k;
 		cmd = osc_path("adc", state->config.app.osc_prefix);
 		lo_send_from(state->outgoing, state->server, LO_TT_IMMEDIATE, cmd, "if",
-					e->tilt.sensor + 3, e->tilt.k / (float) 255);
+	             e->tilt.sensor + 3, e->tilt.k / (float) 1023);
 		s_free(cmd);
 	}
 }
