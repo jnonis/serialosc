@@ -134,7 +134,7 @@ handle_tilt(const monome_event_t *e, void *data)
 	             e->tilt.sensor + 2, e->tilt.z / (float) 1023);
 		s_free(cmd);
 	}
-	if (adcXValue != e->tilt.k) {
+	if (adcKValue != e->tilt.k) {
 		adcKValue = e->tilt.k;
 		cmd = osc_path("adc", state->config.app.osc_prefix);
 		lo_send_from(state->outgoing, state->server, LO_TT_IMMEDIATE, cmd, "if",
